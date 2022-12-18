@@ -9,6 +9,21 @@ function timerCount(){
   }, 1000)
 }
 
+function minusButton(){
+  currentTime -= 1
+  domTimer.textContent = currentTime
+}
+
+function plusButton(){
+  currentTime += 1
+  domTimer.textContent = currentTime
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
+  
   timerCount()
+  
+  document.getElementById("minus").addEventListener("click", minusButton)
+  document.getElementById("plus").addEventListener("click", plusButton)
 })
