@@ -38,12 +38,27 @@ function pauseCounter(e){
   })
 }
 
+function resumeCounter(e){
+  seconds = setInterval(incrementTime, 1000)
+  e.target.innerText = "pause"
+  const buttons = ["minus", "plus", "heart", "submit"]
+  buttons.forEach(button => {
+    document.getElementById(button).disabled = false
+  })
+}
+
 document.addEventListener("DOMContentLoaded", () => {  
-  
-  
+   
   document.getElementById("minus").addEventListener("click", minusButton)
   document.getElementById("plus").addEventListener("click", plusButton)
   document.getElementById("comment-form").addEventListener("submit", addComment)
-  document.getElementById("pause").addEventListener("click", pauseCounter)
+  document.getElementById("pause").addEventListener("click", (e) => {
+    if(e.target.innerText === "pause"){
+      pauseCounter(e)
+    }
+    else{
+      resumeCounter(e)
+    }
+  })
 
 })
