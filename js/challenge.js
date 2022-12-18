@@ -1,12 +1,11 @@
 let currentTime = parseInt(document.getElementById("counter").textContent.replace(/\s/g, ''))
 let domTimer = document.getElementById("counter")
+seconds = setInterval(incrementTime, 1000)
 
-function timerCount(){
-  setInterval(() => {
-    currentTime += 1
-    domTimer.textContent = currentTime
 
-  }, 1000)
+function incrementTime(){
+  currentTime += 1
+  domTimer.textContent = currentTime
 }
 
 function minusButton(){
@@ -30,11 +29,21 @@ function addComment(e){
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function pauseCounter(e){
+  clearInterval(seconds)
+  e.target.innerText = "resume"
+  const buttons = ["minus", "plus", "heart", "submit"]
+  buttons.forEach(button => {
+    document.getElementById(button).disabled = true
+  })
+}
+
+document.addEventListener("DOMContentLoaded", () => {  
   
-  timerCount()
   
   document.getElementById("minus").addEventListener("click", minusButton)
   document.getElementById("plus").addEventListener("click", plusButton)
   document.getElementById("comment-form").addEventListener("submit", addComment)
+  document.getElementById("pause").addEventListener("click", pauseCounter)
+
 })
