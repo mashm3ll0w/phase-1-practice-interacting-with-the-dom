@@ -47,6 +47,32 @@ function resumeCounter(e){
   })
 }
 
+function likeNumber() {
+  const likesContainer = document.querySelector(".likes")
+  let counter = document.getElementById("counter")
+  let likedTime = parseInt(counter.innerText)
+  let likedCounter
+  
+  // Keep track of the liked numbers in an array
+  let likedNumArr = []
+  for (let child of likesContainer.children){ 
+    likedNumArr.push(parseInt(child.dataset.likedNum))
+  }
+
+  // Check if the number liked is already in the likedNumArr and add the times liked if found
+  if (likedNumArr.includes(likedTime)) {
+      likedCounter = document.querySelector(`[data-liked-num="${likedTime}"]`);
+      let likedTimes = parseInt(likedCounter.children[0].innerText);
+      likedCounter.innerHTML = likedTime + " has been liked <span>" + (likedTimes + 1) + "</span> times";
+  } 
+  else {
+    likedCounter = document.createElement("li")
+    likedCounter.dataset.likedNum = likedTime 
+    likedCounter.innerHTML = likedTime + " has been liked <span>1</span> time"
+    likesContainer.appendChild(likedCounter);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {  
    
   document.getElementById("minus").addEventListener("click", minusButton)
@@ -61,4 +87,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+  document.getElementById("heart").addEventListener("click", likeNumber)
 })
